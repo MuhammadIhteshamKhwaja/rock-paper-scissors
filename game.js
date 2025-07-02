@@ -1,19 +1,32 @@
+const btns = document.querySelectorAll(".game-btn");
+const compChoiceOutput = document.querySelector(".comp-choice");
+const userChoiceOutput = document.querySelector(".user-choice");
+const resultOutput = document.querySelector(".result");
+const userScoreOutput = document.querySelector(".user-score");
+const compScoreOutput = document.querySelector(".comp-score");
+const winnerOutput = document.querySelector(".winner");
+const resetBtn = document.querySelector(".reset");
+resetBtn.style.visibility = "hidden";
+let userScore = 0;
+let computerScore = 0;
 
 
 const choice = ["rock", "paper" , "scissors"];
 
-const getComputerChoice= () => {
-    let randNum =  Math.floor(Math.random()*3);  // it generates random number from 0 to 2
-    return choice[randNum];
+  btns.forEach( btn => {
+  btn.addEventListener("click" , () => {
+    console.log(btn.id);
+    
 
-} 
-const getUserChoice = () => {
-  
-    let userChoice = prompt("Rock ,  Paper or scissors?").toLowerCase();
-    return userChoice ;
-}
-let userScore = 0;
-let computerScore = 0;
+
+let compChoice =  choice[Math.floor(Math.random()*3)];  // it generates random number from 0 to 2
+
+let userChoice = btn.id;
+
+
+compChoiceOutput.textContent = `Computer selected ${compChoice}`;
+userChoiceOutput.textContent = `User selected ${userChoice}`;
+
 const playRound = (compChoice ,  userChoice) => {
 console.log(`user choice = ${userChoice} \n computer choice = ${compChoice}`)
     if (compChoice !== userChoice){
@@ -22,36 +35,59 @@ console.log(`user choice = ${userChoice} \n computer choice = ${compChoice}`)
         (compChoice === "paper" && userChoice ==="rock") ||
         (compChoice === "scissors" && userChoice === "paper"))
     {
-        console.log(`Computer's ${compChoice} beats your ${userChoice}`)
+        
+        resultOutput.textContent = `Computer's ${compChoice} beats your ${userChoice}` 
         computerScore++;
+
     } else if   ((userChoice === "rock" && compChoice === "scissors" ) ||
                 (userChoice === "paper" && compChoice ==="rock") ||
                 (userChoice === "scissors" && compChoice === "paper"))
                 {
-                console.log(`Your ${userChoice} beats computer's ${compChoice}`)
+                resultOutput.textContent = `Your ${userChoice} beats computer's ${compChoice}`    
+                
             userScore++;
         }
     
 }
     else {
-        console.log("It's a draw");
+        resultOutput.textContent = `Its a draw.`
     }
     console.log(`user score = ${userScore} \n computer score ${computerScore}`)
+    userScoreOutput.textContent = `User Score = ${userScore}`;
+    compScoreOutput.textContent = `Computer Score = ${computerScore}`;
     
 }
 
-for(let i = 1 ; i <= 5 ;  i++){
-    console.log(`\n--- Round ${i} ---`)
-playRound ( getComputerChoice() , getUserChoice());
 
-}
+playRound ( compChoice , userChoice);
+
+if(userScore === 5 || computerScore ===5){
 if(computerScore>userScore){
-    console.log("Computer won , better luck next time!")
+   
+    winnerOutput.textContent = `Computer won , better luck next time!`;
 }
 else if (computerScore === userScore){
-    console.log("It's a Draw...")
+    winnerOutput.textContent = ` Its a draw.`
+    
 }
 else{
-    console.log("Congrats you won!!!")
+    winnerOutput.textContent = ` Congrats you won!!! `;
+    
 
 };
+
+btns.forEach(btn => btn.disabled = true);
+resetBtn.style.visibility = "visible";
+
+resetBtn.addEventListener("click" , () => {
+    location.reload();
+})
+
+
+// setTimeout(()=>{
+// location.reload()
+// },3000);
+}
+
+})
+})
