@@ -15,7 +15,7 @@ const choice = ["rock", "paper" , "scissors"];
 
   btns.forEach( btn => {
   btn.addEventListener("click" , () => {
-    console.log(btn.id);
+    
     
 
 
@@ -28,7 +28,6 @@ compChoiceOutput.textContent = `Computer selected ${compChoice}`;
 userChoiceOutput.textContent = `User selected ${userChoice}`;
 
 const playRound = (compChoice ,  userChoice) => {
-console.log(`user choice = ${userChoice} \n computer choice = ${compChoice}`)
     if (compChoice !== userChoice){
 
     if ((compChoice === "rock" && userChoice === "scissors" ) ||
@@ -52,7 +51,7 @@ console.log(`user choice = ${userChoice} \n computer choice = ${compChoice}`)
     else {
         resultOutput.textContent = `Its a draw.`
     }
-    console.log(`user score = ${userScore} \n computer score ${computerScore}`)
+    
     userScoreOutput.textContent = `User Score = ${userScore}`;
     compScoreOutput.textContent = `Computer Score = ${computerScore}`;
     
@@ -84,9 +83,7 @@ resetBtn.addEventListener("click" , () => {
 })
 
 
-// setTimeout(()=>{
-// location.reload()
-// },3000);
+
 }
 
 })
